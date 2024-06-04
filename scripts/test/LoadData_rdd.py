@@ -4,12 +4,13 @@ import time
 
 spark = SparkSession.builder.appName("RDD to PyTorch").getOrCreate()
 
-data = [x for x in range(1,100000)]
+data = [x for x in range(1,6)]
 rdd = spark.sparkContext.parallelize(data)
 
 data_list = rdd.collect()
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else"mps")
+print(device)
 
 data_tensor = torch.tensor(data_list)
 
